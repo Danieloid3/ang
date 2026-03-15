@@ -12,6 +12,11 @@ app = FastAPI(title="Sofia Chat Microservicio")
 URL_SISTEMA_CENTRAL = os.environ.get("WEBHOOK_SISTEMA_CENTRAL")
 
 
+@app.get("/ping")
+async def ping():
+    return {"status": "ok"}
+
+
 @app.post("/solicitar-chat")
 async def iniciar_chat(solicitud: SolicitudChat):
     """Recibe la orden desde Sofía Calls para iniciar el chat con un candidato o invitado."""
