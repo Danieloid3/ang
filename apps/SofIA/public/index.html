@@ -1,0 +1,374 @@
+<!-- Archivo: public/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SofIA | RiwiChat AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<!-- BARRA LATERAL -->
+<aside class="sidebar">
+    <div class="brand">
+        <div class="logo"></div>
+        <div>
+            <h1 class="brand-title">RiwiConnect AI</h1>
+            <p class="brand-subtitle">SofIA</p>
+        </div>
+    </div>
+
+    <div class="sidebar-scroll">
+        <nav class="nav-menu">
+
+            <p class="nav-section">RED Y CONEXIÓN</p>
+            <a href="#" class="nav-item" onclick="showView('view-ngrok', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.86a10 10 0 0 1 14 0"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/></svg>
+                Iniciar Ngrok
+            </a>
+            <a href="#" class="nav-item" onclick="showView('view-diag-red', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                Diagnóstico de Red
+            </a>
+
+            <p class="nav-section mt-4">CHATBOT Y FLUJO</p>
+            <a href="#" class="nav-item" onclick="showView('view-bot-trigger', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 3.82-13 1.5 1.5 0 0 1 2.18 0 22 22 0 0 1 3.82 13Z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M15 12h5s-.55-3.03-2-4c-1.62-1.08-5 0-5 0"/></svg>
+                Trigger Masivo Chatbot
+            </a>
+            <a href="#" class="nav-item" onclick="showView('view-bot-payload', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg>
+                Ver JSON del Candidato
+            </a>
+            <a href="#" class="nav-item" onclick="showView('view-check-cand', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Ver Estado Candidatos
+            </a>
+
+            <p class="nav-section mt-4">BASE DE DATOS</p>
+            <a href="#" class="nav-item" onclick="showView('view-reset-cand', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                Preparar Candidato (9)
+            </a>
+            <a href="#" class="nav-item" onclick="showView('view-db-check', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg>
+                Verificar Conexión
+            </a>
+            <a href="#" class="nav-item" onclick="showView('view-db-reset', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 1 0 2.32-6.03L21 8"/></svg>
+                Limpiar Trabajos (EN_CURSO)
+            </a>
+            <a href="#" class="nav-item danger-text" onclick="showView('view-db-full', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg>
+                Borrado Total (Reinicio)
+            </a>
+
+            <!-- ================= NUEVA SECCIÓN DE LOGS ================= -->
+            <p class="nav-section mt-4">MONITOREO (LOGS)</p>
+            <a href="#" class="nav-item" onclick="showView('view-logs-ver', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+                Ver Logs Entrantes
+            </a>
+            <a href="#" class="nav-item danger-text" onclick="showView('view-logs-limpiar', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                Limpiar Logs
+            </a>
+            <a href="#" class="nav-item" onclick="showView('view-logs-crear', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg>
+                Crear Tabla (Inicial)
+            </a>
+
+            <p class="nav-section mt-4">PRUEBAS Y DIAGNÓSTICO</p>
+
+            <a href="#" class="nav-item" onclick="showView('view-invite-jurado', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                Invitar Jurados
+            </a>
+
+            <a href="#" class="nav-item" onclick="showView('view-test-direct', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg>
+                Forzar Chatbot Directo
+            </a>
+
+            <a href="#" class="nav-item" onclick="showView('view-test-http', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+                Prueba HTTP (API Local)
+            </a>
+
+            <a href="#" class="nav-item" onclick="showView('view-test-scenarios', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h5l2-9 5 18 2-9h6"/></svg>
+                Simular Escenarios
+            </a>
+            <a href="#" class="nav-item" onclick="showView('view-test-webhook', this)">
+                <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg>
+                Simular Webhook
+            </a>
+        </nav>
+    </div>
+</aside>
+
+<!-- ÁREA PRINCIPAL -->
+<main class="main-content">
+    <header class="topbar">
+        <h2 class="page-title">Panel de Control de Scripts</h2>
+        <div class="user-profile"><span>Agente: SofIA</span><div class="avatar">S</div></div>
+    </header>
+
+    <div class="dashboard-layout">
+        <div id="views-container">
+
+            <!-- VISTA POR DEFECTO -->
+            <div id="view-welcome" class="info-card active-view">
+                <div class="card-header">
+                    <div class="icon-box bg-slate-light">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m3 21 1.9-5.7a8.5 8.5 0 1 1 3.8 3.8z"/></svg>
+                    </div>
+                    <div>
+                        <h3>Bienvenida al Panel de RiwiConnect</h3>
+                        <p class="card-desc">Selecciona un script de la barra lateral izquierda para gestionar el flujo conversacional de SofIA.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ================== RED Y CONEXIÓN ================== -->
+            <div id="view-ngrok" class="info-card">
+                <div class="card-header"><div class="icon-box bg-slate-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h.01"/><path d="M2 8.82a15 15 0 0 1 20 0"/><path d="M5 12.86a10 10 0 0 1 14 0"/><path d="M8.5 16.43a5 5 0 0 1 7 0"/></svg></div><div><h3>Conexión Pública (Webhook)</h3></div></div>
+
+                <!-- SECCIÓN RENDER (PRODUCCIÓN) -->
+                <div style="background: #e3f2fd; padding: 15px; border-radius: 8px; border: 1px solid #90caf9; margin-bottom: 20px;">
+                    <h4 style="color: #1565c0; margin: 0 0 10px 0; display: flex; align-items: center; gap: 8px;">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+                        SI YA USASTE RENDER (Recomendado)
+                    </h4>
+                    <p style="font-size: 0.9em; color: #333; margin-bottom: 10px;">
+                        <strong>¡No necesitas correr Ngrok en tu PC!</strong> Tu servidor ya está internet.
+                        <br>Dale este link a tu compañera para que el bot te responda aquí:
+                    </p>
+                    <div style="display: flex; gap: 10px;">
+                        <input type="text" readonly value="https://riwiconnect.onrender.com/api/chatbot/webhook" class="form-control" style="background: #fff; cursor: text;" onclick="this.select()">
+                        <button class="btn btn-outline" onclick="navigator.clipboard.writeText('https://riwiconnect.onrender.com/api/chatbot/webhook'); alert('¡Link copiado! Mándaselo a ella.')">Copiar</button>
+                    </div>
+                </div>
+
+                <hr style="border: 0; border-top: 1px dashed #ccc; margin: 20px 0;">
+
+                <div style="opacity: 0.7;">
+                    <h4 style="margin: 0 0 10px 0; font-size: 0.95em; color: #666;">MODO DESARROLLO LOCAL (Solo si Render falla)</h4>
+                    <ul class="script-details">
+                        <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Exponer tu servidor local a Internet.</li>
+                        <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Abre un túnel en el puerto 3000.</li>
+                    </ul>
+                    <button class="btn btn-primary" onclick="startNgrok()">Ejecutar: npm run tunnel</button>
+                </div>
+            </div>
+
+            <div id="view-diag-red" class="info-card">
+                <div class="card-header"><div class="icon-box bg-slate-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div><div><h3>Diagnóstico de Red</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Verificar que tú y tu compañera estén conectadas.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Lee el <code>.env</code> y envía un ping a la URL de tu compañera.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Si el Trigger Masivo falla, esto te ayuda a saber si el problema es tuyo o si ella apagó su servidor.</li>
+                </ul>
+                <button class="btn btn-primary" onclick="runScript('test-network.js')">Ejecutar Diagnóstico</button>
+            </div>
+
+            <!-- ================== CHATBOT Y FLUJO ================== -->
+            <div id="view-bot-trigger" class="info-card">
+                <div class="card-header"><div class="icon-box bg-mint-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 3.82-13 1.5 1.5 0 0 1 2.18 0 22 22 0 0 1 3.82 13Z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M15 12h5s-.55-3.03-2-4c-1.62-1.08-5 0-5 0"/></svg></div><div><h3>Trigger Masivo de Chatbot</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Iniciar la fase de rescate por WhatsApp.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Busca a los candidatos con 9 o más intentos y les envía el JSON al chatbot.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Para simular el momento real en que SofIA se rinde de llamar y delega el trabajo al bot de WhatsApp.</li>
+                </ul>
+                <button class="btn btn-primary bg-mint text-dark" onclick="runScript('bulk-trigger-chatbot.js')">Disparar Chatbots</button>
+            </div>
+
+            <div id="view-bot-payload" class="info-card">
+                <div class="card-header"><div class="icon-box bg-mint-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><path d="M14 2v6h6"/><path d="M16 13H8"/><path d="M16 17H8"/><path d="M10 9H8"/></svg></div><div><h3>Ver JSON (Payload) de un Candidato</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Debuggear antes de enviar.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Muestra en consola el JSON exacto que se construyó para el candidato.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Para revisar que fechas, horas y UUIDs estén bien antes de enviarlos.</li>
+                </ul>
+                <div class="flex-row">
+                    <button class="btn btn-outline" style="flex: 0 0 auto;" onclick="loadUsers()">1. Cargar Usuarios</button>
+                    <select id="select-payload" class="form-control"><option value="">2. Selecciona un candidato...</option></select>
+                    <button class="btn btn-primary bg-mint text-dark" style="flex: 0 0 auto;" onclick="runScriptWithSelect('view-candidate-payload.js', 'select-payload')">3. Ver JSON</button>
+                </div>
+            </div>
+
+            <div id="view-check-cand" class="info-card">
+                <div class="card-header"><div class="icon-box bg-mint-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--mint)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div><div><h3>Ver Estado de Candidatos (Check DB)</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Confirmar el éxito del flujo completo.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Imprime una tabla con el estado actual de los candidatos.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Para verificar que el Webhook actualizó correctamente la base de datos de SofIA tras una respuesta de WhatsApp.</li>
+                </ul>
+                <button class="btn btn-primary" onclick="runScript('check-candidate.js')">Revisar Estados Actuales</button>
+            </div>
+
+            <!-- ================== BASE DE DATOS ================== -->
+            <div id="view-reset-cand" class="info-card">
+                <div class="card-header"><div class="icon-box bg-yellow-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--space-cadet)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div><h3>Preparar Candidato (Reset a 9 Intentos)</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Probar el Chatbot.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Le pone 9 intentos y estado <code>PENDIENTE</code> al candidato.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Porque el trigger masivo requiere mínimo 9 intentos para dispararse.</li>
+                </ul>
+                <div class="flex-row">
+                    <button class="btn btn-outline" style="flex: 0 0 auto;" onclick="loadUsers()">1. Cargar Usuarios</button>
+                    <select id="select-reset-cand" class="form-control"><option value="">2. Selecciona a quién preparar...</option></select>
+                    <button class="btn btn-primary" style="flex: 0 0 auto;" onclick="runScriptWithSelect('reset-candidate.js', 'select-reset-cand')">3. Preparar Candidato</button>
+                </div>
+            </div>
+
+            <div id="view-db-check" class="info-card">
+                <div class="card-header"><div class="icon-box bg-yellow-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--space-cadet)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/></svg></div><div><h3>Verificar Conexión BD</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Verificar conectividad con Supabase.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Hace un ping a PostgreSQL.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Como primer paso si otros scripts fallan o dan Timeout.</li>
+                </ul>
+                <button class="btn btn-primary" style="background: #E6CA52; color: #181E4B;" onclick="runScript('test-db-connection.js')">Verificar Conexión</button>
+            </div>
+
+            <div id="view-db-reset" class="info-card">
+                <div class="card-header"><div class="icon-box bg-yellow-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--space-cadet)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 2v6h-6"/><path d="M3 12a9 9 0 1 0 2.32-6.03L21 8"/></svg></div><div><h3>Limpiar Trabajos (EN_CURSO)</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Mantenimiento preventivo.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Libera llamadas congeladas en estado <code>EN_CURSO</code>.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Útil si detuviste el servidor bruscamente durante una operación de red.</li>
+                </ul>
+                <button class="btn btn-primary" style="background: #E6CA52; color: #181E4B;" onclick="runScript('reset-db.js')">Limpiar Rápidamente</button>
+            </div>
+
+            <div id="view-db-full" class="info-card">
+                <div class="card-header"><div class="icon-box" style="background: rgba(254,101,79,0.1);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--tomato)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/><line x1="10" x2="10" y1="11" y2="17"/><line x1="14" x2="14" y1="11" y2="17"/></svg></div><div><h3>Borrado Total del Historial</h3></div></div>
+                <ul class="script-details" style="color: #FE654F;">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Iniciar un "nuevo día" desde cero.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Borra TODO el historial de llamadas, vacía la cola y pone 0 intentos a todos.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> El sistema no interactuará con alguien que ya agotó intentos o ya está en el historial.</li>
+                </ul>
+                <button class="btn btn-danger" onclick="runScript('reset-db.js', '', '--total')">⚠️ Ejecutar Borrado Total</button>
+            </div>
+
+            <!-- ================= NUEVA SECCIÓN DE LOGS ================= -->
+            <div id="view-logs-ver" class="info-card">
+                <div class="card-header"><div class="icon-box bg-slate-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s3-7 10-7 10 7 10 7-3 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg></div><div><h3>Ver Logs de Webhook (Auditoría)</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Espiar qué información exacta te manda el chatbot.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Muestra los últimos 10 JSONs recibidos en la tabla <code>webhook_logs</code>.</li>
+                </ul>
+                <button class="btn btn-primary" onclick="runScript('view-webhook-logs.js')">Ver Últimos 10 Logs</button>
+            </div>
+
+            <div id="view-logs-limpiar" class="info-card">
+                <div class="card-header"><div class="icon-box" style="background: rgba(254,101,79,0.1);"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--tomato)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18"/><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6"/><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg></div><div><h3>Limpiar Tabla de Logs</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Borrar los registros antiguos para no llenar tu BD.</li>
+                </ul>
+                <!-- Ajusté el nombre para que busque si lo creaste como un archivo separado, si lo llamaste diferente solo cambia el string -->
+                <button class="btn btn-danger" onclick="runScript('clear-webhook-logs.js')">Vaciar Logs</button>
+            </div>
+
+            <div id="view-logs-crear" class="info-card">
+                <div class="card-header"><div class="icon-box bg-yellow-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--space-cadet)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5V19A9 3 0 0 0 21 19V5"/><path d="M3 12A9 3 0 0 0 21 12"/><line x1="12" y1="12" x2="12" y2="18"/><line x1="9" y1="15" x2="15" y2="15"/></svg></div><div><h3>Crear Tabla Logs (Inicialización)</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Crear la tabla <code>webhook_logs</code> en PostgreSQL por primera vez.</li>
+                </ul>
+                <!-- Usando el nombre que me dijiste: create-logs-table.js -->
+                <button class="btn btn-primary" style="background: #E6CA52; color: #181E4B;" onclick="runScript('create-logs-table.js')">Instalar Tabla Logs</button>
+            </div>
+
+            <!-- ================== PRUEBAS (TESTING) ================== -->
+
+            <!-- NUEVA VISTA: Invitar Jurados -->
+            <div id="view-invite-jurado" class="info-card">
+                <div class="card-header"><div class="icon-box bg-slate-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div><div><h3>Invitar Jurado a Presentación</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Demostración para el Proyecto Integrador.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Fuerza la invitación al Evento seleccionado para un candidato.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Para contactar rápidamente a los jurados sin depender de las llamadas previas.</li>
+                </ul>
+                <div style="display: flex; flex-direction: column; gap: 15px; margin-top: 15px;">
+                    <!-- Fila 1: Candidato -->
+                    <div class="flex-row">
+                        <button class="btn btn-outline" style="flex: 0 0 auto;" onclick="loadUsers()">1. Cargar Usuarios</button>
+                        <select id="select-invite-jurado" class="form-control"><option value="">2. Selecciona un jurado...</option></select>
+                    </div>
+
+                    <!-- Fila 2: Evento y Botón de Enviar -->
+                    <div class="flex-row">
+                        <select id="select-evento-jurado" class="form-control" style="background-color: var(--slate-light);">
+                            <option value="">3. Selecciona el Evento...</option>
+                            <option value="5" selected>ID 5 - Presentación (16 Mar - 15:00)</option>
+                            <option value="1">ID 1 - Entrevista Técnica (Prueba)</option>
+                        </select>
+                        <button class="btn btn-primary" style="flex: 0 0 auto;" onclick="enviarInvitacionDoble()">4. Enviar Invitación</button>
+                    </div>
+                </div>
+            </div>
+
+            <div id="view-test-direct" class="info-card">
+                <div class="card-header"><div class="icon-box bg-slate-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m22 2-7 20-4-9-9-4Z"/><path d="M22 2 11 13"/></svg></div><div><h3>Forzar Chatbot Directo</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Probar la lógica interna de SofIA.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Envía el JSON ignorando la regla de los 9 intentos.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Útil para saber si el problema es de un candidato en específico.</li>
+                </ul>
+                <div class="flex-row">
+                    <button class="btn btn-outline" style="flex: 0 0 auto;" onclick="loadUsers()">Cargar Usuarios</button>
+                    <select id="select-test-direct" class="form-control"><option value="">Selecciona...</option></select>
+                    <button class="btn btn-primary" style="flex: 0 0 auto;" onclick="runScriptWithSelect('test-chatbot-direct.js', 'select-test-direct')">Forzar Envío</button>
+                </div>
+            </div>
+
+            <div id="view-test-http" class="info-card">
+                <div class="card-header"><div class="icon-box bg-slate-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></div><div><h3>Prueba HTTP API Local</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Probar la ruta POST de Express.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Hace un fetch a <code>/api/chatbot/trigger-manual</code> en localhost.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Para simular qué pasaría si Postman intenta llamar a tu API.</li>
+                </ul>
+                <button class="btn btn-primary" onclick="runScript('test-chatbot.js')">Probar Ruta</button>
+            </div>
+
+            <div id="view-test-scenarios" class="info-card">
+                <div class="card-header"><div class="icon-box bg-slate-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12h5l2-9 5 18 2-9h6"/></svg></div><div><h3>Simular Escenarios (Respuestas)</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Validar reglas de negocio.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Finge que los candidatos respondieron Agendado, No interesado, etc.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Para ver si la BD guarda bien las notas y estados ante casos complejos.</li>
+                </ul>
+                <button class="btn btn-primary" onclick="runScript('test-webhook-scenarios.js')">Simular Escenarios</button>
+            </div>
+
+            <div id="view-test-webhook" class="info-card">
+                <div class="card-header"><div class="icon-box bg-slate-light"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--slate-blue)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" x2="12" y1="15" y2="3"/></svg></div><div><h3>Simular Webhook Entrante</h3></div></div>
+                <ul class="script-details">
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg> Propósito:</strong> Probar tu Webhook local.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg> Qué hace:</strong> Simula recibir un JSON idéntico al de tu compañera.</li>
+                    <li><strong><svg class="bullet-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M15 14c.2-1 .7-1.7 1.5-2.5 1-.9 1.5-2.2 1.5-3.5A6 6 0 0 0 6 8c0 1 .2 2.2 1.5 3.5.7.9 1.2 1.5 1.5 2.5"/><path d="M9 18h6"/><path d="M10 22h4"/></svg> Por qué usarlo:</strong> Para probar que SofIA procesa bien la respuesta sin depender de tu compañera.</li>
+                </ul>
+                <button class="btn btn-primary" onclick="runScript('test-webhook-response.js')">Simular Respuesta</button>
+            </div>
+
+        </div>
+
+        <!-- TERMINAL -->
+        <div class="terminal-container">
+            <div class="terminal-header">
+                <div class="terminal-title"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span> Terminal de Salida</div>
+                <button class="btn-text" onclick="clearTerminal()">🧹 Limpiar</button>
+            </div>
+            <div id="loader" class="loader">⚙️ Ejecutando...</div>
+            <div id="terminal" class="terminal-body">> SofIA Panel SPA Inicializado.
+                > Selecciona un script en el menú lateral.</div>
+        </div>
+    </div>
+</main>
+<script src="app.js"></script>
+</body>
+</html>

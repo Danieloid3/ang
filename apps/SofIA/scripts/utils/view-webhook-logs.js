@@ -1,0 +1,54 @@
+const { Client } = require('pg');
+require('dotenv').config();
+
+const client = new Client({
+    connectionString: process.env.DATABASE_URL,
+    ssl: { rejectUnauthorized: false }
+});
+
+async function main() {
+    try {
+        await client.connect();
+        
+        console.log('\n🔍 BÚSQUEDA DE LOGS RECIENTES DE WEBHOOK (ÚLTIMOS 10) 🔍');
+        console.log('='.repeat(60));
+
+        const res = await client.query(`
+            SELECT 
+                id, 
+                payload, 
+                -- Convertimos la fecha UTC de la BD a la hora de Colombia explícitamente y la formateamos como texto
+                to_char(recibido_en AT TIME ZONE 'UTC' AT TIME ZONE 'America/Bogota', 'DD/MM/YYYY, HH12:MI:SS AM') as fecha_formateada,
+                procesado_exitosamente, 
+                error_log 
+            FROM webhook_logs 
+            ORDER BY recibido_en DESC 
+            LIMIT 10
+        `);
+
+        if (res.rows.length === 0) {
+            console.log('⚠️ No se encontraron logs. El webhook no ha sido llamado recientemente.');
+        } else {
+            // Invertimos el arreglo para que el log más reciente quede AL FINAL de la terminal
+            const logs = res.rows.reverse();
+
+            logs.forEach(row => {
+                console.log(`\n📅 [${row.fecha_formateada}] - ID: ${row.id}`);
+                console.log(`📦 PAYLOAD:`);
+                console.log(JSON.stringify(row.payload, null, 2));
+                console.log(`✅ PROCESADO: ${row.procesado_exitosamente === null ? 'SIN ESTADO' : row.procesado_exitosamente}`);
+                if (row.error_log) {
+                    console.log(`❌ ERROR AL PROCESAR: ${row.error_log}`);
+                }
+                console.log('-'.repeat(60));
+            });
+        }
+
+    } catch (err) {
+        console.error('❌ Error consultando logs:', err);
+    } finally {
+        await client.end();
+    }
+}
+
+main();
